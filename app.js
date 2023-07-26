@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const errorsHandler = require('./middlewares/errorsHandler');
 
 const router = require('./routes/index');
 
@@ -18,6 +19,8 @@ const app = express();
 app.use(cors());
 app.use(helmet());
 
+app.use(express.json());
+
 mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
 });
@@ -27,5 +30,7 @@ app.use(requestLogger);
 app.use(router);
 
 app.use(errorLogger);
+
+app.use(errorsHandler);
 
 app.listen(PORT);
