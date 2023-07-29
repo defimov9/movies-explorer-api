@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const isURL = require('validator/lib/isURL');
 
 const movieSchema = new mongoose.Schema({
   country: {
@@ -25,27 +26,24 @@ const movieSchema = new mongoose.Schema({
     type: String,
     required: true,
     validate: {
-      validator(link) {
-        return /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/.test(link);
-      },
+      validator: (v) => isURL(v),
+      message: 'Неверный формат URL',
     },
   },
   trailerLink: {
     type: String,
     required: true,
     validate: {
-      validator(link) {
-        return /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/.test(link);
-      },
+      validator: (v) => isURL(v),
+      message: 'Неверный формат URL',
     },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
-      validator(link) {
-        return /(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/.test(link);
-      },
+      validator: (v) => isURL(v),
+      message: 'Неверный формат URL',
     },
   },
   owner: {
