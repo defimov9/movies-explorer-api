@@ -10,7 +10,7 @@ const errorsHandler = require('./middlewares/errorsHandler');
 const router = require('./routes/index');
 
 const {
-  PORT,
+  PORT = 3000,
   MONGODB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb',
 } = process.env;
 
