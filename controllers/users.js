@@ -8,7 +8,7 @@ const ConflictError = require('../errors/ConflictError');
 const { NODE_ENV, JWT_SECRET } = process.env;
 
 const getUserInfo = (req, res, next) => {
-  const { userId } = req.user._id;
+  const userId = req.user._id;
 
   User.findById(userId)
     .then((user) => {
@@ -28,7 +28,7 @@ const getUserInfo = (req, res, next) => {
 
 const updateUserInfo = (req, res, next) => {
   const { email, name } = req.body;
-  const { userId } = req.user._id;
+  const userId = req.user._id;
 
   User.findByIdAndUpdate(
     userId,
@@ -45,12 +45,12 @@ const updateUserInfo = (req, res, next) => {
       res.send({ user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        next(new BadRequestError('Переданы некорректные данные.'));
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует.'));
         return;
       }
-      if (err.name === '11000') {
-        next(new ConflictError('Пользователь с таким email уже существует.'));
+      if (err.name === 'ValidationError') {
+        next(new BadRequestError('Переданы некорректные данные.'));
         return;
       }
       next(err);
