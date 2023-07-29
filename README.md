@@ -12,4 +12,4 @@
 ## Ссылки на проект
 
 - [Ссылка на репозиторий](https://github.com/defimov9/movies-explorer-api)
-- [Ссылка на бэкенд](https://github.com/defimov9/movies-explorer-api)
+- [Ссылка на бэкенд](https://api.defimov9.movies.nomoreparties.co)
